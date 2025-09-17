@@ -153,12 +153,16 @@ Namespace Koala
             'Then call the base class implementation.
             Return MyBase.Read(reader)
         End Function
+#If NET8_0_OR_GREATER
+        ' Skip Windows Forms dependent methods on non-Windows platforms in .NET 8+
+#Else
         Protected Overrides Sub AppendAdditionalComponentMenuItems(ByVal menu As System.Windows.Forms.ToolStripDropDown)
             'Append the item to the menu, making sure it's always enabled and checked if Absolute is True.
             Dim item As ToolStripMenuItem = Menu_AppendItem(menu, "AutoUpdate", AddressOf Menu_AutoUpdateClicked, True, AutoUpdate)
             'Specifically assign a tooltip text to the menu item.
             item.ToolTipText = "When checked, XML file is updated automatically."
         End Sub
+#End If
         Private Sub Menu_AutoUpdateClicked(ByVal sender As Object, ByVal e As EventArgs)
             RecordUndoEvent("AutoUpdate")
             AutoUpdate = Not AutoUpdate

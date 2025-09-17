@@ -1,275 +1,82 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug64</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>
-    </ProductVersion>
-    <SchemaVersion>
-    </SchemaVersion>
-    <ProjectGuid>{169DCACE-CAB8-4CDB-9B9A-56310D242078}</ProjectGuid>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>Koala</RootNamespace>
     <AssemblyName>Koala</AssemblyName>
-    <FileAlignment>512</FileAlignment>
-    <MyType>Windows</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-    <TargetFrameworkProfile />
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    
+    <!-- Only enable Windows Forms on Windows -->
+    <UseWindowsForms Condition="'$(OS)' == 'Windows_NT'">true</UseWindowsForms>
+    
+    <!-- Disable auto-generated assembly attributes to avoid conflicts -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    
+    <!-- VB.NET specific settings -->
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <MyType>Empty</MyType>
+    
+    <!-- Suppress VB.NET warnings -->
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    
+    <!-- Remove hard-coded paths - use relative output path -->
+    <OutputPath Condition="'$(OutputPath)' == ''">bin\$(Configuration)\</OutputPath>
+    
+    <!-- For Grasshopper deployment, copy to Libraries folder if it exists -->
+    <GrasshopperLibraries Condition="'$(OS)' == 'Windows_NT'">$(USERPROFILE)\AppData\Roaming\Grasshopper\Libraries</GrasshopperLibraries>
+    <GrasshopperLibraries Condition="'$(OS)' != 'Windows_NT'">$(OutputPath)</GrasshopperLibraries>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug64|AnyCPU' ">
+
+  <!-- Custom configurations -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug64'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>C:\Users\admin\AppData\Roaming\Grasshopper\Libraries\</OutputPath>
-    <DocumentationFile>Koala.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release64|AnyCPU' ">
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release64'">
     <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Koala.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
-  <PropertyGroup>
-    <OptionExplicit>On</OptionExplicit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionCompare>Binary</OptionCompare>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionStrict>Off</OptionStrict>
-  </PropertyGroup>
-  <PropertyGroup>
-    <OptionInfer>On</OptionInfer>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <DefineDebug>true</DefineDebug>
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\..\..\Users\jbroz\AppData\Roaming\Grasshopper\Libraries\</OutputPath>
-    <DocumentationFile>Koala.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release64|x64'">
-    <DefineTrace>true</DefineTrace>
-    <OutputPath>..\..\..\..\Users\jbroz\AppData\Roaming\Grasshopper\Libraries\</OutputPath>
-    <DocumentationFile>Koala.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Eto, Version=2.5.0.0, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoCommon.6.34.21034.7001\lib\net45\Eto.dll</HintPath>
-    </Reference>
-    <Reference Include="GH_IO, Version=6.34.21034.7000, Culture=neutral, PublicKeyToken=6a29997d2e6b4f97, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grasshopper.6.34.21034.7001\lib\net45\GH_IO.dll</HintPath>
-    </Reference>
-    <Reference Include="Grasshopper, Version=6.34.21034.7000, Culture=neutral, PublicKeyToken=dda4f5ec2cd80803, processorArchitecture=MSIL">
-      <HintPath>..\packages\Grasshopper.6.34.21034.7001\lib\net45\Grasshopper.dll</HintPath>
-    </Reference>
-    <Reference Include="Rhino.UI, Version=6.34.21034.7000, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoCommon.6.34.21034.7001\lib\net45\Rhino.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="RhinoCommon, Version=6.34.21034.7000, Culture=neutral, PublicKeyToken=552281e97c755530, processorArchitecture=MSIL">
-      <HintPath>..\packages\RhinoCommon.6.34.21034.7001\lib\net45\RhinoCommon.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
+    <PackageReference Include="Grasshopper" Version="9.0.25051.305-wip" />
+    <PackageReference Include="Rhino.Inside" Version="9.0.5-beta" />
+    <PackageReference Include="RhinoCommon" Version="9.0.25051.305-wip" />
+    <PackageReference Include="System.Resources.Extensions" Version="8.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
   </ItemGroup>
+
+  <!-- Exclude problematic My Project files that don't work well with .NET 8 -->
   <ItemGroup>
-    <Import Include="Microsoft.VisualBasic" />
-    <Import Include="System" />
-    <Import Include="System.Collections" />
-    <Import Include="System.Collections.Generic" />
-    <Import Include="System.Data" />
-    <Import Include="System.Diagnostics" />
-    <Import Include="System.Linq" />
-    <Import Include="System.Xml.Linq" />
+    <Compile Remove="My Project\Application.Designer.vb" />
+    <Compile Remove="My Project\Settings.Designer.vb" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="2Dmember.vb" />
-    <Compile Include="Analysis.vb" />
-    <Compile Include="BeamInternalNode.vb" />
-    <Compile Include="BeamLoads.vb" />
-    <Compile Include="Beams.vb" />
-    <Compile Include="BeamSupport.vb" />
-    <Compile Include="CreateXML.vb" />
-    <Compile Include="Cross-Sections.vb" />
-    <Compile Include="CrossLink.vb" />
-    <Compile Include="EdgeLoad.vb" />
-    <Compile Include="EdgeSupport.vb" />
-    <Compile Include="FreePointMoment.vb" />
-    <Compile Include="FreeSurfaceLoad.Designer.vb">
-      <DependentUpon>FreeSurfaceLoad.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FreeSurfaceLoad.vb" />
-    <Compile Include="GapLocalBeamNL.vb" />
-    <Compile Include="HelperTools.vb" />
-    <Compile Include="Hinges.vb" />
-    <Compile Include="Layers.vb" />
-    <Compile Include="LimitForceLocalBeamNL.vb" />
-    <Compile Include="LinearCombination.vb" />
-    <Compile Include="LineHinge.vb" />
-    <Compile Include="LineMomentOnBeam.vb" />
-    <Compile Include="LineMomentOnEdge.vb" />
-    <Compile Include="LoadCasesAndGroups.vb" />
-    <Compile Include="KoalaInfo.vb" />
-    <Compile Include="LoadPanels.vb" />
-    <Compile Include="My Project\AssemblyInfo.vb" />
-    <Compile Include="My Project\Application.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Application.myapp</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="My Project\Settings.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <Compile Include="FreePointLoad.vb" />
-    <Compile Include="FreeLineLoad.vb" />
-    <Compile Include="NLCable.vb" />
-    <Compile Include="NodeRigidArm.vb" />
-    <Compile Include="Nodes.vb" />
-    <Compile Include="NodeSupport.vb" />
-    <Compile Include="NonlinearCombination.vb" />
-    <Compile Include="NonlinearFunction.vb" />
-    <Compile Include="Openings.vb" />
-    <Compile Include="PointLoadOnBeam.vb" />
-    <Compile Include="PointLoadOnStructNode.vb" />
-    <Compile Include="PointMomentOnBeam.vb" />
-    <Compile Include="PointMomentOnStructNode.vb" />
-    <Compile Include="PointSupportOnBeam.vb" />
-    <Compile Include="PressTensionOnlyBeamNl.vb" />
-    <Compile Include="ProjectInfo.vb" />
-    <Compile Include="SlabInternalEdge.vb" />
-    <Compile Include="StabilityCombination.vb" />
-    <Compile Include="Subsoil.vb" />
-    <Compile Include="SurfaceLoad.vb" />
-    <Compile Include="SurfaceSupport.vb" />
-    <Compile Include="ThermalLoadOnBeam.vb" />
-    <Compile Include="ThermalLoadOnSurface.vb" />
+    <EmbeddedResource Include="Resources\**\*.bmp" />
+    <EmbeddedResource Include="Resources\koala.xml.def" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="My Project\Resources.resx">
-      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="My Project\Application.myapp">
-      <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
-    </None>
-    <None Include="My Project\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <CustomToolNamespace>My</CustomToolNamespace>
-      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="Resources\Beam.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\2DMember.bmp" />
-    <Content Include="Resources\Analysis.bmp" />
-    <None Include="Resources\TehrmalLoadSurface.bmp" />
-    <None Include="Resources\ThermalLoadBeam.bmp" />
-    <None Include="Resources\SurfaceSupport.bmp" />
-    <None Include="Resources\BeamLineSupport.bmp" />
-    <None Include="Resources\Buckling.bmp" />
-    <None Include="Resources\BeamLineMoment.bmp" />
-    <None Include="Resources\BeamPointMoment.bmp" />
-    <None Include="Resources\BeamInternalNode.bmp" />
-    <None Include="Resources\Cable.bmp" />
-    <Content Include="Resources\CreateXML.bmp" />
-    <None Include="Resources\Cross-link.bmp" />
-    <Content Include="Resources\Cross-section.bmp" />
-    <None Include="Resources\EdgeLoad.bmp" />
-    <Content Include="Resources\FreeLineLoad.bmp" />
-    <Content Include="Resources\FreePointLoad.bmp" />
-    <None Include="Resources\FreePointMoment.bmp" />
-    <Content Include="Resources\FreeSurfaceLoad.bmp" />
-    <None Include="Resources\Gap.bmp" />
-    <Content Include="Resources\Hinge.bmp" />
-    <None Include="Resources\LinearCombination.bmp" />
-    <None Include="Resources\LimitForceBeamNL.bmp" />
-    <None Include="Resources\InternalSlab.bmp" />
-    <Content Include="Resources\koala.xml.def" />
-    <None Include="Resources\Layers.bmp" />
-    <None Include="Resources\LineEdgeMoment.bmp" />
-    <None Include="Resources\LineHinge.bmp" />
-    <Content Include="Resources\LineLoad.bmp" />
-    <Content Include="Resources\LineSupport.bmp" />
-    <Content Include="Resources\LoadCases.bmp" />
-    <Content Include="Resources\LoadGroup.bmp" />
-    <None Include="Resources\Opening.bmp" />
-    <None Include="Resources\Node.bmp" />
-    <None Include="Resources\LoadPanel.bmp" />
-    <Content Include="Resources\NodeSupport.bmp" />
-    <None Include="Resources\PointLoadPoint.bmp" />
-    <None Include="Resources\PointLoadBeam.bmp" />
-    <None Include="Resources\NonLinearCombination.bmp" />
-    <None Include="Resources\StabilityCombination.bmp" />
-    <None Include="Resources\PressOnly.bmp" />
-    <None Include="Resources\ProjectInfo.bmp" />
-    <None Include="Resources\PointSupportOnBeam.bmp" />
-    <None Include="Resources\SubSoil.bmp" />
-    <None Include="Resources\PointMoment.bmp" />
-    <None Include="Resources\NonLinearFunction.bmp" />
-    <None Include="Resources\RigidArms.bmp" />
-    <Content Include="Resources\SurfaceLoad.bmp" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+
+  <!-- Post-build event to create .gha file -->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="Exists('$(GrasshopperLibraries)')">
+    <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(GrasshopperLibraries)\$(AssemblyName).gha" />
+    <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(AssemblyName).gha" />
   </Target>
-  <Target Name="AfterBuild">
+  
+  <!-- Fallback post-build if Grasshopper Libraries doesn't exist -->
+  <Target Name="PostBuildFallback" AfterTargets="PostBuildEvent" Condition="!Exists('$(GrasshopperLibraries)')">
+    <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(AssemblyName).gha" />
   </Target>
-  -->
-  <PropertyGroup>
-    <PostBuildEvent>Copy "$(TargetPath)" "$(TargetDir)$(ProjectName).gha"
-</PostBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU'">
-    <StartProgram>C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
-    <StartArguments>
-    </StartArguments>
-    <StartAction>Program</StartAction>
-  </PropertyGroup>
-  <Import Project="..\packages\RhinoCommon.6.34.21034.7001\build\net45\RhinoCommon.targets" Condition="Exists('..\packages\RhinoCommon.6.34.21034.7001\build\net45\RhinoCommon.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\RhinoCommon.6.34.21034.7001\build\net45\RhinoCommon.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\RhinoCommon.6.34.21034.7001\build\net45\RhinoCommon.targets'))" />
-    <Error Condition="!Exists('..\packages\Grasshopper.6.34.21034.7001\build\net45\Grasshopper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Grasshopper.6.34.21034.7001\build\net45\Grasshopper.targets'))" />
-  </Target>
-  <Import Project="..\packages\Grasshopper.6.34.21034.7001\build\net45\Grasshopper.targets" Condition="Exists('..\packages\Grasshopper.6.34.21034.7001\build\net45\Grasshopper.targets')" />
+
 </Project>
