@@ -1,43 +1,84 @@
-# ASP.NET Core (.NET Framework)
-# Build and test ASP.NET Core projects targeting the full .NET Framework.
-# Add steps that publish symbols, save build artifacts, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# .NET Core build pipeline
+# Build and test .NET Core projects for cross-platform support
+# Now supports building Koala on multiple platforms including macOS
 
 trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'windows-latest'  # Main build on Windows for full compatibility
 
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  dotnetVersion: '8.x'
 
-steps:
-- task: NuGetToolInstaller@1
+strategy:
+  matrix:
+    Windows:
+      imageName: 'windows-latest'
+    macOS:
+      imageName: 'macOS-latest'
+    Linux:
+      imageName: 'ubuntu-latest'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+jobs:
+- job: Build
+  displayName: 'Build on'
+  pool:
+    vmImage: $(imageName)
+  
+  steps:
+  - task: UseDotNet@2
+    displayName: 'Install .NET 8 SDK'
+    inputs:
+      version: $(dotnetVersion)
+      includePreviewVersions: false
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: 'Restore packages'
+    inputs:
+      command: 'restore'
+      projects: '$(solution)'
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  # Build cross-platform compatible projects on all platforms
+  - task: DotNetCoreCLI@2
+    displayName: 'Build KoalaResults (Cross-platform)'
+    inputs:
+      command: 'build'
+      projects: 'KoalaResults/KoalaResults.csproj'
+      arguments: '--configuration $(buildConfiguration) --no-restore'
 
+  - task: DotNetCoreCLI@2
+    displayName: 'Build KoalaUT Tests (Cross-platform)'
+    inputs:
+      command: 'build' 
+      projects: 'KoalaUT/KoalaUT.vbproj'
+      arguments: '--configuration $(buildConfiguration) --no-restore'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Pipeline.Workspace)'
-    artifact: 'Koala'
-    publishLocation: 'pipeline'
+  # Build main Koala project only on Windows (due to Windows Forms dependencies)
+  - task: DotNetCoreCLI@2
+    displayName: 'Build Koala Main Project (Windows only)'
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+    inputs:
+      command: 'build'
+      projects: 'Koala/Koala.vbproj'  
+      arguments: '--configuration $(buildConfiguration) --no-restore'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Run Tests'
+    inputs:
+      command: 'test'
+      projects: 'KoalaUT/KoalaUT.vbproj'
+      arguments: '--configuration $(buildConfiguration) --no-build --collect "Code Coverage"'
+
+  # Publish artifacts only from Windows build (includes all components)
+  - task: PublishPipelineArtifact@1
+    condition: eq(variables['Agent.OS'], 'Windows_NT')
+    inputs:
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: 'Koala-$(Agent.OS)'
+      publishLocation: 'pipeline'
 
 
