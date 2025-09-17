@@ -16,7 +16,7 @@
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
     <OptionInfer>On</OptionInfer>
-    <MyType>Windows</MyType>
+    <MyType>Empty</MyType>
     
     <!-- Suppress VB.NET warnings -->
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
@@ -27,6 +27,12 @@
     <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="Microsoft.VisualBasic" Version="10.3.0" />
+  </ItemGroup>
+
+  <!-- Exclude problematic My Project files that don't work well with .NET 8 -->
+  <ItemGroup>
+    <Compile Remove="My Project\Application.Designer.vb" />
+    <Compile Remove="My Project\Settings.Designer.vb" />
   </ItemGroup>
 
   <ItemGroup>
