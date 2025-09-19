@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/UG4sqgBtXj/FWhhAhXRphiPN1GEe3ZOzOsmhVq8EU1a3cavcGbBDGieq+7JeSO6Vi26oEVCqT3FNbEOuTLuvA==",
+  "dgSpecHash": "kkWMMvHV6FYqSVz5OKB1iOMMQnwlBikTlMBXX4s2IP9+M4WW0+TykwQz9bfq8scvnez7ZgFv3QZ7gpY15dSj5g==",
   "success": true,
   "projectFilePath": "/home/runner/work/Koala/Koala/KoalaUT/KoalaUT.vbproj",
   "expectedPackageFiles": [
@@ -26,12 +26,15 @@
     "/home/runner/.nuget/packages/rhinocommon/8.23.25251.13001/rhinocommon.8.23.25251.13001.nupkg.sha512",
     "/home/runner/.nuget/packages/system.buffers/4.5.1/system.buffers.4.5.1.nupkg.sha512",
     "/home/runner/.nuget/packages/system.collections.immutable/1.5.0/system.collections.immutable.1.5.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.configuration.configurationmanager/8.0.1/system.configuration.configurationmanager.8.0.1.nupkg.sha512",
     "/home/runner/.nuget/packages/system.diagnostics.diagnosticsource/5.0.0/system.diagnostics.diagnosticsource.5.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.drawing.common/8.0.10/system.drawing.common.8.0.10.nupkg.sha512",
-    "/home/runner/.nuget/packages/system.memory/4.5.4/system.memory.4.5.4.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
     "/home/runner/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.resources.extensions/8.0.0/system.resources.extensions.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "/home/runner/.nuget/packages/system.security.cryptography.protecteddata/8.0.0/system.security.cryptography.protecteddata.8.0.0.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.netcore.app.ref/6.0.36/microsoft.netcore.app.ref.6.0.36.nupkg.sha512",
     "/home/runner/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.36/microsoft.aspnetcore.app.ref.6.0.36.nupkg.sha512"
   ],
