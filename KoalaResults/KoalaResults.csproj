@@ -64,6 +64,7 @@
     <Content Include="Resources\ICO_Stress1D.png" />
   </ItemGroup>
 
+  <!-- PostBuild: Copy DLL to GHA extension for Grasshopper plugin loading while preserving the original DLL for project references -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(ProjectName).gha" />
   </Target>

@@ -125,6 +125,7 @@
     <Content Include="Resources\SurfaceLoad.bmp" />
   </ItemGroup>
 
+  <!-- PostBuild: Copy DLL to GHA extension for Grasshopper plugin loading while preserving the original DLL for project references -->
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release' OR '$(Configuration)' == 'Release64'">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(ProjectName).gha" />
   </Target>
