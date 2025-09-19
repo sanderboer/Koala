@@ -5,7 +5,8 @@
     <ProjectGuid>{A6916EAF-D644-4904-8D03-E4E7F2488D68}</ProjectGuid>
     <RootNamespace>KoalaUT</RootNamespace>
     <AssemblyName>KoalaUT</AssemblyName>
-    <MyType Condition="'$(OS)' == 'Windows_NT'">Windows</MyType>
+    <MyType Condition="'$(OS)' == 'Windows_NT' AND '$(TargetFramework)' == 'net48'">Windows</MyType>
+    <MyType Condition="'$(TargetFramework)' == 'net6.0-windows'">Empty</MyType>
     <IsTestProject>true</IsTestProject>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
@@ -15,6 +16,7 @@
     <DocumentationFile>KoalaUT.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,7 +5,8 @@
     <ProjectGuid>{169DCACE-CAB8-4CDB-9B9A-56310D242078}</ProjectGuid>
     <RootNamespace>Koala</RootNamespace>
     <AssemblyName>Koala</AssemblyName>
-    <MyType>Windows</MyType>
+    <MyType Condition="'$(TargetFramework)' == 'net48'">Windows</MyType>
+    <MyType Condition="'$(TargetFramework)' == 'net6.0-windows'">Empty</MyType>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>
     <OptionStrict>Off</OptionStrict>
@@ -124,7 +125,7 @@
     <Content Include="Resources\SurfaceLoad.bmp" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release' OR '$(Configuration)' == 'Release64'">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(ProjectName).gha" />
     <Delete Files="$(TargetPath)" />
   </Target>

@@ -4225,12 +4225,12 @@ CablesCount, SE_nodesInternalBeam, internalNodesBeamCount, SE_LineHinges, linehi
             osb.AppendLine("</h>")
             For i = 1 To ShapeAndNodes.Count - 2
                 osb.AppendLine(ConCat_row(i - 1))
-                osb.AppendLine(ConCat_pn("1", DupNodeDict(ShapeAndNodes.ElementAt(i))))
+                osb.AppendLine(ConCat_pn("1", DupNodeDict(ShapeAndNodes.ElementAt(CInt(i)))))
                 osb.appendline(ConCat_pv("2", "0"))
                 osb.AppendLine("</row>")
             Next i
             osb.AppendLine(ConCat_row(i - 1))
-            osb.AppendLine(ConCat_pn("1", DupNodeDict(ShapeAndNodes.ElementAt(i))))
+            osb.AppendLine(ConCat_pn("1", DupNodeDict(ShapeAndNodes.ElementAt(CInt(i)))))
             osb.AppendLine("</row>")
 
 
@@ -4262,7 +4262,7 @@ CablesCount, SE_nodesInternalBeam, internalNodesBeamCount, SE_LineHinges, linehi
             osb.AppendLine("</row>")
             For i = 2 To ShapeAndNodes.Count - 1
                 osb.AppendLine(ConCat_row(i - 1))
-                osb.AppendLine(ConCat_pn("1", DupNodeDict(ShapeAndNodes.ElementAt(i))))
+                osb.AppendLine(ConCat_pn("1", DupNodeDict(ShapeAndNodes.ElementAt(CInt(i)))))
                 osb.AppendLine("</row>")
             Next i
 

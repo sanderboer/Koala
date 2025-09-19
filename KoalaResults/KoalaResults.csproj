@@ -64,7 +64,7 @@
     <Content Include="Resources\ICO_Stress1D.png" />
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release'">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(ProjectName).gha" />
     <Delete Files="$(TargetPath)" />
   </Target>
