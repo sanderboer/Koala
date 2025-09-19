@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <ProjectGuid>{A6916EAF-D644-4904-8D03-E4E7F2488D68}</ProjectGuid>
     <RootNamespace>KoalaUT</RootNamespace>
     <AssemblyName>KoalaUT</AssemblyName>

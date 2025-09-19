@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <ProjectGuid>{169DCACE-CAB8-4CDB-9B9A-56310D242078}</ProjectGuid>
     <RootNamespace>Koala</RootNamespace>
     <AssemblyName>Koala</AssemblyName>
@@ -16,24 +15,40 @@
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net48'">
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)'=='Debug64' OR '$(Configuration)'=='Debug'">
     <OutputPath Condition="'$(OS)' == 'Windows_NT'">$(APPDATA)\Grasshopper\Libraries\</OutputPath>
     <OutputPath Condition="'$(OS)' != 'Windows_NT'">$(HOME)/.config/Grasshopper/Libraries/</OutputPath>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net6.0-windows'">NET6_0_OR_GREATER</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release64' OR '$(Configuration)'=='Release'">
     <OutputPath>bin\Release\</OutputPath>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net6.0-windows'">NET6_0_OR_GREATER</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug64|AnyCPU' OR '$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartProgram Condition="'$(OS)' == 'Windows_NT'">C:\Program Files\Rhino 8\System\Rhino.exe</StartProgram>
+    <StartProgram Condition="'$(OS)' == 'Windows_NT' AND '$(TargetFramework)' == 'net48'">C:\Program Files\Rhino 6\System\Rhino.exe</StartProgram>
+    <StartProgram Condition="'$(OS)' == 'Windows_NT' AND '$(TargetFramework)' == 'net6.0-windows'">C:\Program Files\Rhino 8\System\Rhino.exe</StartProgram>
     <StartProgram Condition="'$(OS)' != 'Windows_NT'">/Applications/RhinoWIP.app/Contents/MacOS/Rhino</StartProgram>
     <StartAction>Program</StartAction>
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+    <PackageReference Include="Grasshopper" Version="6.34.21034.7001" />
+    <PackageReference Include="RhinoCommon" Version="6.34.21034.7001" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0-windows'">
     <PackageReference Include="Grasshopper" Version="8.23.25251.13001" />
     <PackageReference Include="RhinoCommon" Version="8.23.25251.13001" />
     <PackageReference Include="System.Drawing.Common" Version="8.0.10" />
