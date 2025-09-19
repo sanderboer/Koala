@@ -127,7 +127,6 @@
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'Release' OR '$(Configuration)' == 'Release64'">
     <Copy SourceFiles="$(TargetPath)" DestinationFiles="$(TargetDir)$(ProjectName).gha" />
-    <Delete Files="$(TargetPath)" />
   </Target>
 
 </Project>
