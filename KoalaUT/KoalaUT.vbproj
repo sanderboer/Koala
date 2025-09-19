@@ -5,7 +5,7 @@
     <ProjectGuid>{A6916EAF-D644-4904-8D03-E4E7F2488D68}</ProjectGuid>
     <RootNamespace>KoalaUT</RootNamespace>
     <AssemblyName>KoalaUT</AssemblyName>
-    <MyType>Windows</MyType>
+    <MyType Condition="'$(OS)' == 'Windows_NT'">Windows</MyType>
     <IsTestProject>true</IsTestProject>
     <OptionExplicit>On</OptionExplicit>
     <OptionCompare>Binary</OptionCompare>

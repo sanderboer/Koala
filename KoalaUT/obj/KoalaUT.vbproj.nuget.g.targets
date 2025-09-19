@@ -4,6 +4,7 @@
     <Import Project="$(NuGetPackageRoot)microsoft.testing.platform.msbuild/1.4.3/buildMultiTargeting/Microsoft.Testing.Platform.MSBuild.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.testing.platform.msbuild/1.4.3/buildMultiTargeting/Microsoft.Testing.Platform.MSBuild.targets')" />
   </ImportGroup>
   <ImportGroup Condition=" '$(TargetFramework)' == 'net48' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.resources.extensions/8.0.0/buildTransitive/net462/System.Resources.Extensions.targets" Condition="Exists('$(NuGetPackageRoot)system.resources.extensions/8.0.0/buildTransitive/net462/System.Resources.Extensions.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.testing.platform.msbuild/1.4.3/buildTransitive/netstandard2.0/Microsoft.Testing.Platform.MSBuild.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.testing.platform.msbuild/1.4.3/buildTransitive/netstandard2.0/Microsoft.Testing.Platform.MSBuild.targets')" />
     <Import Project="$(NuGetPackageRoot)mstest.testadapter/3.6.3/build/net462/MSTest.TestAdapter.targets" Condition="Exists('$(NuGetPackageRoot)mstest.testadapter/3.6.3/build/net462/MSTest.TestAdapter.targets')" />
     <Import Project="$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net48/1.0.3/build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets" Condition="Exists('$(NuGetPackageRoot)microsoft.netframework.referenceassemblies.net48/1.0.3/build/Microsoft.NETFramework.ReferenceAssemblies.net48.targets')" />
