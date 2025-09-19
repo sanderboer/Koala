@@ -10,7 +10,7 @@ namespace KoalaResults
         {
             get
             {
-                return "Test";
+                return "KoalaResults";
             }
         }
         public override Bitmap Icon
@@ -26,7 +26,7 @@ namespace KoalaResults
             get
             {
                 //Return a short string describing the purpose of this GHA library.
-                return "";
+                return "Koala Results components for analyzing SCIA Engineer calculation results";
             }
         }
         public override Guid Id
@@ -42,7 +42,7 @@ namespace KoalaResults
             get
             {
                 //Return a string identifying you or your company.
-                return " ";
+                return "Developed for SCIA by Strawberrylab";
             }
         }
         public override string AuthorContact
@@ -50,7 +50,7 @@ namespace KoalaResults
             get
             {
                 //Return a string representing your preferred contact details.
-                return "";
+                return "support@scia.net";
             }
         }
     }

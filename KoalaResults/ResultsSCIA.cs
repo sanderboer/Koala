@@ -9,7 +9,7 @@ using Rhino.Geometry;
 // folder in Grasshopper.
 // You can use the _GrasshopperDeveloperSettings Rhino command for that.
 
-namespace MyProject1
+namespace KoalaResults
 {
     public class ResultsSCIA : GH_Component
     {
@@ -21,9 +21,9 @@ namespace MyProject1
         /// new tabs/panels will automatically be created.
         /// </summary>
         public ResultsSCIA()
-          : base("Test", "ASpi",
-              "Construct an Archimedean, or arithmetic, spiral given its radii and number of turns.",
-              "Curve", "Primitive")
+          : base("Results SCIA", "ResultsSCIA",
+              "Display and analyze results from SCIA Engineer calculations.",
+              "Koala", "Results")
         {
         }
 
