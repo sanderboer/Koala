@@ -24,6 +24,18 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 
+# NuGet packages folder
+packages/
+*.nuget.cache
+
+# Build artifacts
+*.dll
+*.pdb
+*.exe
+*.gha
+*.xml.def
+*.log
+
 # Visual Studio cache/options directory
 .vs/
 
